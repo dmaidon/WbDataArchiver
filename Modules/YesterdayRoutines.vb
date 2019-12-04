@@ -67,8 +67,7 @@ Namespace Modules
                 Dim aa = ""
                 If Not File.Exists(_yd) Then
                     aa =
-                        "Date,High Temp,High Temp Time,Low Temp,Low Temp Time,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Time,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Time,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Time,Rain Rate,Rain Total,Max UV Index,Max UV Index Time, Max SolarRad,Max SolarRad Time, Rain Total 24Hrs" _
-                        & vbLf
+                        $"#Month: {Now.ToString("MMMM yyyy", CultureInfo.CurrentCulture)}{vbLf}Date,High Temp,High Temp Time,Low Temp,Low Temp Time,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Time,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Time,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Time,Rain Rate,Rain Total,Max UV Index,Max UV Index Time, Max SolarRad,Max SolarRad Time, Rain Total 24Hrs{vbLf}"
                 End If
 
                 Using w As New StreamWriter(_yd, True)
@@ -77,7 +76,6 @@ Namespace Modules
                 End Using
                 FrmMain.Rtb.AppendText($"Yesterday data updated @ {Now:T}{vbLf}")
             Catch ex As Exception
-                'PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
                 FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
             Finally
                 'a

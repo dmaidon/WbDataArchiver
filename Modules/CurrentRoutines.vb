@@ -30,7 +30,7 @@ Namespace Modules
 
                 Dim aa = ""
                 If Not File.Exists(_cd) Then
-                    aa = $"#Date: {Now.ToString("dddd MMMM d yyyy", CultureInfo.CurrentCulture)}{vbLf}" & "Time,Temp,Humidity,Dewpoint,Heat Index,Baro Press,Sea Level Press,Wind Spd,Avg Wind Spd,Wind Dir,Wind Chill,Rain Rate,Rain Total Year,UV Index,SolarRad,Evapo,Cloud Base, Rain Total Today" & vbLf
+                    aa = $"#Date: {Now.ToString("dddd MMMM d yyyy", CultureInfo.CurrentCulture)}{vbLf}Time,Temp,Humidity,Dewpoint,Heat Index,Baro Press,Sea Level Press,Wind Spd,Avg Wind Spd,Wind Dir,Wind Chill,Rain Rate,Rain Total Year,UV Index,SolarRad,Evapo,Cloud Base, Rain Total Today{vbLf}"
                 End If
                 Using w As New StreamWriter(_cd, True)
                     Await w.WriteAsync(aa & String.Join(",", DData) & vbLf)
@@ -38,7 +38,6 @@ Namespace Modules
                 End Using
                 FrmMain.Rtb.AppendText($"Current data updated @ {Now:T}{vbLf}")
             Catch ex As Exception
-                'PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
                 FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
             Finally
                 'a

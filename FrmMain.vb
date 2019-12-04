@@ -25,9 +25,11 @@ Friend Class FrmMain
 
         SetMidnightRollover()
         SetMonthlyRollover()
-        'MsgBox(GetLastDayOfMonth)
     End Sub
 
+    ''' <summary>
+    ''' Manually update application settings
+    ''' </summary>
     Private Shared Sub UpgradeMySettings()
         'https://stackoverflow.com/questions/1702260/losing-vb-net-my-settings-with-each-new-clickonce-deployment-release
         If My.Settings.MustUpgrade Then
@@ -40,10 +42,12 @@ Friend Class FrmMain
     Private Sub TmrClock_Tick(sender As Object, e As EventArgs) Handles TmrClock.Tick
         TsslClock.Text = $"{Now:T}"
 
+        'countdown to next current data update
         If TmrDataUpdate.Enabled Then
             TsslCU.Text = String.Format(TsslCU.Tag.ToString, $"{DateDiff(DateInterval.Second, Date.Now, CurUpdate):D0}")
         End If
 
+        'countdown to midnight data update for yesterday's data
         If TmrMidnight.Enabled Then
             TsslMU.Text = If _
                 (DateDiff(DateInterval.Minute, My.Computer.Clock.LocalTime, MidUpdate) < 1,
@@ -51,6 +55,7 @@ Friend Class FrmMain
                  String.Format(TsslMU.Tag.ToString, $"{DateDiff(DateInterval.Minute, Date.Now, MidUpdate):D0}"))
         End If
 
+        'countdown to monthly update performed on last day of month at 11:58:50 pm
         Dim t = MoEndTime.Subtract(Now)
         TsslYU.ToolTipText = $"{t.Days} Days {t.Hours} Hrs {t.Minutes} min {t.Seconds} secs"
 
@@ -84,7 +89,6 @@ Friend Class FrmMain
     End Sub
 
     Private Sub SetMonthlyRollover()
-        '_intMo = GetFirstDayOfNextMonth() '- Date2Unix(Now)
         _intMo = GetLastDayOfMonth()
         MoEndTime = New DateTime(_intMo.Year, _intMo.Month, _intMo.Day, _intMo.Hour, _intMo.Minute, _intMo.Second, 0)
     End Sub
@@ -100,6 +104,7 @@ Friend Class FrmMain
     End Sub
 
     Private Shared Sub FrmMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        'save application settings
         My.Settings.Save()
     End Sub
 

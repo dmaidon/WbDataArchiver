@@ -12,7 +12,6 @@ Namespace Modules
                             Directory.CreateDirectory(fName(j))
                         End If
                     Catch ex As Exception
-                        'PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
                         FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
                     Finally
                         'a
