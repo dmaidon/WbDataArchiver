@@ -1,8 +1,8 @@
 # WbDataArchiver
-Desktop utility to fetch and archive the Weatherbridge data.
+Desktop utility to fetch and archive the Meteobridge/Weatherbridge data.
 
 Folder layout:
-C:
+-C:
  - WbDataArchiver
    - Archives
      - Daily
