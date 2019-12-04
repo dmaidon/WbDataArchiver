@@ -2,8 +2,8 @@
 Desktop utility to fetch and archive the Meteobridge/Weatherbridge data.
 
 Folder layout:
--C:
- - WbDataArchiver
+ -C:\<root>
+  - WbDataArchiver
    - Archives
      - Daily
      - Days
