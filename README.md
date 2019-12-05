@@ -19,6 +19,7 @@ Information required:
   4. Fetch frequency of the current data archive in seconds. Ex: 90
   
 Create a comma delimited file named "settings.csv" and place in the "Settings" folder.
+
 Example:
 
 #Name,Password,IP Address,CurUp Time (Sec)
