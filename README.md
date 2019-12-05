@@ -20,7 +20,9 @@ Information required:
   
 Create a comma delimited file named "settings.csv" and place in the "Settings" folder.
 Example:
+
 #Name,Password,IP Address,CurUp Time (Sec)
+
 meteobridge,myPassword,192.168.0.16,90
 
 "CurUp" = Current data update timer
