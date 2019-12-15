@@ -44,26 +44,24 @@ Partial Class FrmMain
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TmrMidnight = New System.Timers.Timer()
-        Me.Rtb = New System.Windows.Forms.RichTextBox()
-        Me.TmrMonth = New System.Timers.Timer()
-        Me.StatusStrip1.SuspendLayout
-        Me.StatusStrip2.SuspendLayout
-        CType(Me.TmrDataUpdate,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox1.SuspendLayout
-        CType(Me.TmrMidnight,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.TmrMonth,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.RtbLog = New System.Windows.Forms.RichTextBox()
+        Me.StatusStrip1.SuspendLayout()
+        Me.StatusStrip2.SuspendLayout()
+        CType(Me.TmrDataUpdate, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.TmrMidnight, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Font = New System.Drawing.Font("Segoe UI", 7!)
+        Me.StatusStrip1.Font = New System.Drawing.Font("Segoe UI", 7.0!)
         Me.StatusStrip1.GripMargin = New System.Windows.Forms.Padding(0)
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TsslVer, Me.TsslCpy, Me.TsslClock})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 180)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.ShowItemToolTips = true
+        Me.StatusStrip1.ShowItemToolTips = True
         Me.StatusStrip1.Size = New System.Drawing.Size(553, 22)
-        Me.StatusStrip1.SizingGrip = false
+        Me.StatusStrip1.SizingGrip = False
         Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -75,11 +73,11 @@ Partial Class FrmMain
         '
         'TsslCpy
         '
-        Me.TsslCpy.Font = New System.Drawing.Font("Segoe UI", 7!, System.Drawing.FontStyle.Italic)
+        Me.TsslCpy.Font = New System.Drawing.Font("Segoe UI", 7.0!, System.Drawing.FontStyle.Italic)
         Me.TsslCpy.ForeColor = System.Drawing.Color.Maroon
         Me.TsslCpy.Name = "TsslCpy"
         Me.TsslCpy.Size = New System.Drawing.Size(503, 17)
-        Me.TsslCpy.Spring = true
+        Me.TsslCpy.Spring = True
         Me.TsslCpy.Text = "cpy"
         '
         'TsslClock
@@ -90,14 +88,14 @@ Partial Class FrmMain
         '
         'StatusStrip2
         '
-        Me.StatusStrip2.Font = New System.Drawing.Font("Segoe UI", 7!)
+        Me.StatusStrip2.Font = New System.Drawing.Font("Segoe UI", 7.0!)
         Me.StatusStrip2.GripMargin = New System.Windows.Forms.Padding(0)
         Me.StatusStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TsslTr, Me.TsslCU, Me.TsslMU, Me.TsslYU})
         Me.StatusStrip2.Location = New System.Drawing.Point(0, 158)
         Me.StatusStrip2.Name = "StatusStrip2"
-        Me.StatusStrip2.ShowItemToolTips = true
+        Me.StatusStrip2.ShowItemToolTips = True
         Me.StatusStrip2.Size = New System.Drawing.Size(553, 22)
-        Me.StatusStrip2.SizingGrip = false
+        Me.StatusStrip2.SizingGrip = False
         Me.StatusStrip2.TabIndex = 1
         Me.StatusStrip2.Text = "StatusStrip2"
         '
@@ -106,7 +104,7 @@ Partial Class FrmMain
         Me.TsslTr.Name = "TsslTr"
         Me.TsslTr.Size = New System.Drawing.Size(12, 17)
         Me.TsslTr.Tag = "Tr: {0}"
-        Me.TsslTr.Text = "~"
+        Me.TsslTr.Text = "≈"
         '
         'TsslCU
         '
@@ -114,7 +112,7 @@ Partial Class FrmMain
         Me.TsslCU.Name = "TsslCU"
         Me.TsslCU.Size = New System.Drawing.Size(12, 17)
         Me.TsslCU.Tag = "CurUp: {0}"
-        Me.TsslCU.Text = "~"
+        Me.TsslCU.Text = "≈"
         '
         'TsslMU
         '
@@ -122,7 +120,7 @@ Partial Class FrmMain
         Me.TsslMU.Name = "TsslMU"
         Me.TsslMU.Size = New System.Drawing.Size(12, 17)
         Me.TsslMU.Tag = "MidUp: {0}"
-        Me.TsslMU.Text = "~"
+        Me.TsslMU.Text = "≈"
         '
         'TsslYU
         '
@@ -130,7 +128,7 @@ Partial Class FrmMain
         Me.TsslYU.Name = "TsslYU"
         Me.TsslYU.Size = New System.Drawing.Size(12, 17)
         Me.TsslYU.Tag = "YrUp: {0}"
-        Me.TsslYU.Text = "~"
+        Me.TsslYU.Text = "≈"
         '
         'TmrDataUpdate
         '
@@ -138,7 +136,8 @@ Partial Class FrmMain
         '
         'TmrClock
         '
-        Me.TmrClock.Enabled = true
+        Me.TmrClock.Enabled = True
+        Me.TmrClock.Interval = 1000
         '
         'GroupBox1
         '
@@ -154,14 +153,14 @@ Partial Class FrmMain
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(137, 143)
         Me.GroupBox1.TabIndex = 2
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Weatherbridge Login"
         '
         'ChkShowPw
         '
         Me.ChkShowPw.Appearance = System.Windows.Forms.Appearance.Button
         Me.ChkShowPw.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.ChkShowPw.Checked = true
+        Me.ChkShowPw.Checked = True
         Me.ChkShowPw.CheckState = System.Windows.Forms.CheckState.Checked
         Me.ChkShowPw.FlatAppearance.BorderSize = 0
         Me.ChkShowPw.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -170,7 +169,7 @@ Partial Class FrmMain
         Me.ChkShowPw.Name = "ChkShowPw"
         Me.ChkShowPw.Size = New System.Drawing.Size(18, 18)
         Me.ChkShowPw.TabIndex = 3
-        Me.ChkShowPw.UseVisualStyleBackColor = true
+        Me.ChkShowPw.UseVisualStyleBackColor = True
         '
         'TxtIP
         '
@@ -185,7 +184,7 @@ Partial Class FrmMain
         Me.TxtPassword.Name = "TxtPassword"
         Me.TxtPassword.Size = New System.Drawing.Size(106, 18)
         Me.TxtPassword.TabIndex = 1
-        Me.TxtPassword.UseSystemPasswordChar = true
+        Me.TxtPassword.UseSystemPasswordChar = True
         '
         'TxtName
         '
@@ -196,7 +195,7 @@ Partial Class FrmMain
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(7, 96)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(58, 13)
@@ -205,7 +204,7 @@ Partial Class FrmMain
         '
         'Label2
         '
-        Me.Label2.AutoSize = true
+        Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(7, 57)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 13)
@@ -214,7 +213,7 @@ Partial Class FrmMain
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(7, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(34, 13)
@@ -225,29 +224,25 @@ Partial Class FrmMain
         '
         Me.TmrMidnight.SynchronizingObject = Me
         '
-        'Rtb
+        'RtbLog
         '
-        Me.Rtb.BackColor = System.Drawing.SystemColors.Info
-        Me.Rtb.Location = New System.Drawing.Point(156, 8)
-        Me.Rtb.Name = "Rtb"
-        Me.Rtb.ReadOnly = true
-        Me.Rtb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth
-        Me.Rtb.ShowSelectionMargin = true
-        Me.Rtb.Size = New System.Drawing.Size(390, 143)
-        Me.Rtb.TabIndex = 3
-        Me.Rtb.TabStop = false
-        Me.Rtb.Text = ""
-        '
-        'TmrMonth
-        '
-        Me.TmrMonth.SynchronizingObject = Me
+        Me.RtbLog.BackColor = System.Drawing.SystemColors.Info
+        Me.RtbLog.Location = New System.Drawing.Point(156, 8)
+        Me.RtbLog.Name = "RtbLog"
+        Me.RtbLog.ReadOnly = True
+        Me.RtbLog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth
+        Me.RtbLog.ShowSelectionMargin = True
+        Me.RtbLog.Size = New System.Drawing.Size(390, 143)
+        Me.RtbLog.TabIndex = 3
+        Me.RtbLog.TabStop = False
+        Me.RtbLog.Text = ""
         '
         'FrmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 12!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(553, 202)
-        Me.Controls.Add(Me.Rtb)
+        Me.Controls.Add(Me.RtbLog)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.StatusStrip2)
         Me.Controls.Add(Me.StatusStrip1)
@@ -267,7 +262,6 @@ Partial Class FrmMain
         Me.GroupBox1.ResumeLayout(false)
         Me.GroupBox1.PerformLayout
         CType(Me.TmrMidnight,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.TmrMonth,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -292,7 +286,6 @@ End Sub
     Friend WithEvents TsslTr As ToolStripStatusLabel
     Friend WithEvents TsslMU As ToolStripStatusLabel
     Friend WithEvents TsslCU As ToolStripStatusLabel
-    Friend WithEvents Rtb As RichTextBox
-    Friend WithEvents TmrMonth As Timers.Timer
     Friend WithEvents TsslYU As ToolStripStatusLabel
+    Friend WithEvents RtbLog As RichTextBox
 End Class

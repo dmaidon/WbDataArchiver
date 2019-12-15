@@ -7,8 +7,9 @@ Namespace Modules
         Private ReadOnly MData As New List(Of String)
 
         Friend Async Sub WriteMonthlyData()
-            _md = Path.Combine(ArcDirYears, $"{Now.ToString("yyyy", CultureInfo.CurrentCulture)}.csv")
-            Dim provider As CultureInfo = CultureInfo.InvariantCulture
+            'write information to YYYY folder (Ex: /Archives/2019)
+            _md = Path.Combine(ArcDirYr, $"{Now.ToString("yyyy", CultureInfo.CurrentCulture)}.csv")
+            Dim provider = CultureInfo.InvariantCulture
             Const fmt = "yyyyMMddHHmmss"
             Const f2 = "MMM d @ H:mm"
             Dim a As String
@@ -64,19 +65,20 @@ Namespace Modules
 
                 Dim aa = ""
                 If Not File.Exists(_md) Then
-                    aa = $"#Year: {Now.AddDays(-1).ToString("yyyy", CultureInfo.CurrentCulture)}{vbLf}Month,High Temp,High Temp Date,Low Temp,Low Temp Date,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Date,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Date,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Date,Rain Total Month,Rain Total Year,Max UV Index,Max UV Index Date, Max SolarRad,Max SolarRad Date{vbLf}"
+                    aa = $"#Year: {Now.AddDays(- 1).ToString("yyyy", CultureInfo.CurrentCulture)}{vbLf _
+                        }Month,High Temp,High Temp Date,Low Temp,Low Temp Date,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Date,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Date,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Date,Rain Total Month,Rain Total Year,Max UV Index,Max UV Index Date, Max SolarRad,Max SolarRad Date{ _
+                        vbLf}"
                 End If
                 Using w As New StreamWriter(_md, True)
-                    Await w.WriteAsync(aa & String.Join(",", MData) & vbLf)
+                    Await w.WriteAsync(aa & String.Join(",", MData) & vbLf).ConfigureAwait(True)
                     MData.Clear()
                 End Using
-                FrmMain.Rtb.AppendText($"Monthly data updated @ {Now:T}{vbLf}")
+                PrintLog($"Monthly data updated @ {Now:T}{vbLf}")
             Catch ex As Exception
-                FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
+                PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
             Finally
                 'a
             End Try
         End Sub
-
     End Module
 End Namespace

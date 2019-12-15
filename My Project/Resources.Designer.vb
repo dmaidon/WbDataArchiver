@@ -61,6 +61,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to ©2019, PAROLE Software - all rigths reserved..
+        '''</summary>
+        Friend ReadOnly Property cpy() As String
+            Get
+                Return ResourceManager.GetString("cpy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property eye_icon() As System.Drawing.Bitmap

@@ -7,13 +7,14 @@ Namespace Modules
         Private ReadOnly YData As New List(Of String)
 
         Friend Async Sub WriteYesterdayData()
-            Dim provider As CultureInfo = CultureInfo.InvariantCulture
+            'write information to yyyy folder (Ex: Archives/2019/Dec2019.csv)
+            Dim provider = CultureInfo.InvariantCulture
             Const fmt = "yyyyMMddHHmmss"
             Const f2 = "H:mm"
             Dim a As String
 
             Try
-                _yd = Path.Combine(ArcDirDaily, $"{(Now.ToString("MMMyyyy", CultureInfo.CurrentCulture))}.csv")
+                _yd = Path.Combine(ArcDirYr, $"{(Now.ToString("MMMyyyy", CultureInfo.CurrentCulture))}.csv")
                 YData.Add($"{Now.AddDays(-1).ToString("MM-dd-yyyy", CultureInfo.CurrentCulture)}")
                 YData.Add(Gwd("th*temp-ydmax=F.1:*"))
                 a = Gwd("th*temp-ydmaxtime:*")
@@ -66,21 +67,21 @@ Namespace Modules
 
                 Dim aa = ""
                 If Not File.Exists(_yd) Then
-                    aa =
-                        $"#Month: {Now.ToString("MMMM yyyy", CultureInfo.CurrentCulture)}{vbLf}Date,High Temp,High Temp Time,Low Temp,Low Temp Time,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Time,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Time,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Time,Rain Rate,Rain Total,Max UV Index,Max UV Index Time, Max SolarRad,Max SolarRad Time, Rain Total 24Hrs{vbLf}"
+                    aa = $"#Month: {Now.ToString("MMMM yyyy", CultureInfo.CurrentCulture)}{vbLf _
+                        }Date,High Temp,High Temp Time,Low Temp,Low Temp Time,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Time,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Time,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Time,Rain Rate,Rain Total,Max UV Index,Max UV Index Time, Max SolarRad,Max SolarRad Time, Rain Total 24Hrs{ _
+                        vbLf}"
                 End If
 
                 Using w As New StreamWriter(_yd, True)
-                    Await w.WriteAsync(aa & String.Join(",", YData) & vbLf)
+                    Await w.WriteAsync(aa & String.Join(",", YData) & vbLf).ConfigureAwait(True)
                     YData.Clear()
                 End Using
-                FrmMain.Rtb.AppendText($"Yesterday data updated @ {Now:T}{vbLf}")
+                PrintLog($"Yesterday data updated @ {Now:T}{vbLf}")
             Catch ex As Exception
-                FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
+                PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
             Finally
                 'a
             End Try
         End Sub
-
     End Module
 End Namespace

@@ -7,8 +7,9 @@ Namespace Modules
         Private ReadOnly DData As New List(Of String)
 
         Friend Async Sub WriteCurrentData()
+            'write information to YYYY folder (Ex: /Archives/2019/12212019.csv)
             Try
-                _cd = Path.Combine(ArcDirDays, $"{Now.ToString("MMddyyyy", CultureInfo.CurrentCulture)}.csv")
+                _cd = Path.Combine(ArcDirYr, $"{Now.ToString("MMddyyyy", CultureInfo.CurrentCulture)}.csv")
                 DData.Add($"{Now.ToString("HH:mm", CultureInfo.CurrentCulture)}")
                 DData.Add(Gwd("th*temp-act=F.1:*"))
                 DData.Add(Gwd("th*hum-act:*"))
@@ -30,19 +31,20 @@ Namespace Modules
 
                 Dim aa = ""
                 If Not File.Exists(_cd) Then
-                    aa = $"#Date: {Now.ToString("dddd MMMM d yyyy", CultureInfo.CurrentCulture)}{vbLf}Time,Temp,Humidity,Dewpoint,Heat Index,Baro Press,Sea Level Press,Wind Spd,Avg Wind Spd,Wind Dir,Wind Chill,Rain Rate,Rain Total Year,UV Index,SolarRad,Evapo,Cloud Base, Rain Total Today{vbLf}"
+                    aa = $"#Date: {Now.ToString("dddd MMMM d yyyy", CultureInfo.CurrentCulture)}{vbLf _
+                        }Time,Temp,Humidity,Dewpoint,Heat Index,Baro Press,Sea Level Press,Wind Spd,Avg Wind Spd,Wind Dir,Wind Chill,Rain Rate,Rain Total Year,UV Index,SolarRad,Evapo,Cloud Base, Rain Total Today{ _
+                        vbLf}"
                 End If
                 Using w As New StreamWriter(_cd, True)
-                    Await w.WriteAsync(aa & String.Join(",", DData) & vbLf)
+                    Await w.WriteAsync(aa & String.Join(",", DData) & vbLf).ConfigureAwait(True)
                     DData.Clear()
                 End Using
-                FrmMain.Rtb.AppendText($"Current data updated @ {Now:T}{vbLf}")
+                PrintLog($"Current data updated @ {Now:T}{vbLf}")
             Catch ex As Exception
-                FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
+                PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
             Finally
                 'a
             End Try
         End Sub
-
     End Module
 End Namespace

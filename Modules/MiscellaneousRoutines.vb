@@ -12,7 +12,7 @@ Namespace Modules
                     Return wc.DownloadString(New Uri($"http://{WbSet(2)}/cgi-bin/template.cgi?template=[{ds}]&contenttype=text/plain;charset=iso-8859-1"))
                 End Using
             Catch ex As Exception When TypeOf ex Is ArgumentNullException OrElse TypeOf ex Is WebException OrElse TypeOf ex Is NotSupportedException
-                FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
+                PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
                 Return "*"
             Finally
                 'a
@@ -28,7 +28,7 @@ Namespace Modules
             Try
                 Return CLng(Fix(dateTime.Subtract(New DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds))
             Catch ex As Exception
-                FrmMain.Rtb.AppendText(ex.Message & ex.StackTrace & ex.Source & vbLf)
+                PrintErr(ex.Message, ex.TargetSite.ToString, ex.StackTrace, ex.Source, ex.GetBaseException.ToString)
                 Return 0
             Finally
                 'a
