@@ -29,13 +29,16 @@ A Year folder is created for each year. (Example: 2019)  All archive files are p
 
 "CurUp" = Current data update timer
 Run WbDataArchiver and the current data will be saved to the Year folder in a file named: "MMddyyyy.csv". Ex: 12042019.csv
+
 A new file will be created each day and the information is appended to that file.
 On the upper status bar there is a countdown timer until the next current data update.  
 
 "MidUp" = Midnight update timer
 Counts down the minutes and seconds to the midnight rollover event which fetches the data for yesterday and save it to the Year folder in a file named: "MMMyyyy.csv". Ex: Dec2019.csv
+
 A separate line is appended to this file for each day.
 
 "YrUp" = Monthly update timer
 Counts down the minutes and seconds to the midnight rollover event which fetches the data for yesterday and save it to the Year folder in a file named: "yyyy.csv". Ex: 2019.csv
+
 A separate line of data is appended to this file for each month.
