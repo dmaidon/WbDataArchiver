@@ -14,7 +14,9 @@ Namespace Modules
             Dim a As String
 
             Try
-                _yd = Path.Combine(ArcDirYr, $"{(Now.ToString("MMMyyyy", CultureInfo.CurrentCulture))}.csv")
+                'make sure we write to the correct day at the month rollover
+                _yd = If(Now.Day = 1, Path.Combine(ArcDirYr, $"{(Now.AddDays(-1).ToString("MMMyyyy", CultureInfo.CurrentCulture))}.csv"), Path.Combine(ArcDirYr, $"{(Now.ToString("MMMyyyy", CultureInfo.CurrentCulture))}.csv"))
+
                 YData.Add($"{Now.AddDays(-1).ToString("MM-dd-yyyy", CultureInfo.CurrentCulture)}")
                 YData.Add(Gwd("th*temp-ydmax=F.1:*"))
                 a = Gwd("th*temp-ydmaxtime:*")
@@ -83,5 +85,6 @@ Namespace Modules
                 'a
             End Try
         End Sub
+
     End Module
 End Namespace

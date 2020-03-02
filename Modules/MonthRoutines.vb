@@ -8,7 +8,7 @@ Namespace Modules
 
         Friend Async Sub WriteMonthlyData()
             'write information to YYYY folder (Ex: /Archives/2019)
-            _md = Path.Combine(ArcDirYr, $"{Now.ToString("yyyy", CultureInfo.CurrentCulture)}.csv")
+            _md = If(Now.Day = 1, Path.Combine(ArcDirYr, $"{Now.AddDays(-1).ToString("yyyy", CultureInfo.CurrentCulture)}.csv"), Path.Combine(ArcDirYr, $"{Now.ToString("yyyy", CultureInfo.CurrentCulture)}.csv"))
             Dim provider = CultureInfo.InvariantCulture
             Const fmt = "yyyyMMddHHmmss"
             Const f2 = "MMM d @ H:mm"
@@ -65,7 +65,7 @@ Namespace Modules
 
                 Dim aa = ""
                 If Not File.Exists(_md) Then
-                    aa = $"#Year: {Now.AddDays(- 1).ToString("yyyy", CultureInfo.CurrentCulture)}{vbLf _
+                    aa = $"#Year: {Now.AddDays(-1).ToString("yyyy", CultureInfo.CurrentCulture)}{vbLf _
                         }Month,High Temp,High Temp Date,Low Temp,Low Temp Date,Max Humidity,Min Humidity,Max Dew Point,Min Dewpoint,Max Heat Index,Max Heat Index Date,Max Baro Press,Min Baro Press,Max Sea Level Press,Min Sea level Press,Max Wind Spd,Max Wind Spd Date,Average Wind Speed,Wind Direction,Min Wind Chill,Min Wind Chill Date,Rain Total Month,Rain Total Year,Max UV Index,Max UV Index Date, Max SolarRad,Max SolarRad Date{ _
                         vbLf}"
                 End If
@@ -80,5 +80,6 @@ Namespace Modules
                 'a
             End Try
         End Sub
+
     End Module
 End Namespace
